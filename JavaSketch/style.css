@@ -1,0 +1,565 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+.div1 {
+  grid-area: 1 / 1 / 2 / 7;
+}
+.div2 {
+  grid-area: 2 / 3 / 6 / 6;
+}
+.div3 {
+  grid-area: 4 / 1 / 5 / 3;
+}
+.div4 {
+  grid-area: 6 / 1 / 8 / 3;
+}
+.div5 {
+  grid-area: 6 / 3 / 8 / 4;
+}
+.div6 {
+  grid-area: 6 / 5 / 8 / 6;
+}
+.div7 {
+  grid-area: 6 / 4 / 8 / 5;
+}
+.div8 {
+  grid-area: 5 / 3 / 7 / 6;
+}
+.div9 {
+  grid-area: 3 / 1 / 5 / 2;
+}
+.div10 {
+  grid-area: 6 / 4 / 8 / 5;
+}
+.div11 {
+  grid-area: 6 / 5 / 3 / 4;
+}
+.div12 {
+  grid-area: 6 / 1 / 7 / 3;
+}
+.div13 { grid-area: 1 / 6 / 2 / 6; } 
+.div14 { grid-area: 1 / 2 / 2 / 4; } 
+
+
+.move-behind {
+  z-index: -1;
+}
+body {
+  font-family: "Mochiy Pop P One", sans-serif;
+  background-color: #B23929;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000' stroke-width='66.7' stroke-opacity='0.05' %3E%3Ccircle fill='%23B23929' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23ac322d' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23a52b30' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%239d2432' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23951e34' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%238d1936' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23841437' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%237b1038' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23720d38' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23690a38' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23600837' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23560736' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%234d0734' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%23430632' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%233a062f' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%2331052c' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%23280428' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23210024' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+background-attachment: fixed;
+background-size: cover;
+}
+
+p,
+h2,
+h3 {
+  color: #ffd900ea;
+  text-shadow: #1f1e1e 3px 3px 0, 2px 2px 2px rgba(206, 196, 83, 0);
+}
+.canvas-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  margin-top: -0.2rem;
+}
+
+.sketch-bg {
+  margin: 0 auto;
+  border-radius: 1rem;
+  background-color: #d01619;
+  text-align: center;
+  width: auto;
+  height: auto;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+#screen {
+  /* *width height specificed in js*/
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  border: 1px solid gray;
+  background: #afafb6;
+  background: -webkit-linear-gradient(top, #afafb6, #717171);
+  background: -moz-linear-gradient(top, #afafb6, #717171);
+  background: linear-gradient(to bottom, #afafb6, #717171);
+}
+.knob-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-top: -3rem;
+}
+.left-knob,
+.right-knob {
+  background-color: white;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  box-shadow: 1px 1px rgb(121, 121, 121);
+}
+.div2,
+.div8 {
+  margin-left: 2rem;
+}
+.div3 {
+  display: flex;
+  flex-flow: row nowrap;
+  word-wrap: break-word;
+  margin-top: -1rem;
+}
+.div3 h3 {
+  font-size: 0.9rem;
+  text-align: center;
+  width: 115px;
+  height: 115px;
+  margin-left: 5rem;
+  margin-right: 2rem;
+  padding-top: 0.6rem;
+  font-family: 'Carter One', cursive;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.div9 img {
+  position: absolute;
+  z-index: -1;
+  width: 450px;
+  height: 420px;
+  top: 13rem;
+  left: -1rem;
+}
+.div10 img {
+  position: absolute;
+  z-index: -1;
+  width: 400px;
+  height: 400px;
+  top: 35rem;
+  right: 28rem;
+}
+.div4 {
+  width: 100px;
+  height: 100px;
+}
+.circle-bg{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: relative;
+  left: 10rem;
+  z-index: 0;
+}
+.div4 h2 {
+  font-family: 'Carter One', cursive;
+  margin-left: 10rem;
+  margin-top: -4.5rem;
+  margin-bottom: 3.5rem;
+  position: relative;
+  z-index: 1;
+
+}
+.div4 img {
+  height: 450px;
+  width: 450px;
+  position: absolute;
+  z-index: -1;
+  left: -2rem;
+  top: 35rem;
+}
+.div7 {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 80%;
+  height: 80%;
+  margin-top: 0.7rem;
+}
+.div7:not(p){
+  margin-left: 1.4rem;
+}
+.div7 p {
+  margin-left: 2rem;
+  margin-top: 1.2rem;
+  font-family: 'Carter One', cursive;
+  font-size: 0.9rem;
+}
+.div1{
+  margin: 0;
+  height: 2rem;
+}
+
+.message-2{
+  display: inline-block;
+  margin-top: -1rem;
+  color: #ffd900ea;
+}
+#line-size{
+  border-radius: 2rem;
+  text-align: center;
+}
+.line-change{
+  cursor: pointer;
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+
+#logo img{
+  cursor: pointer;
+}
+
+
+.w-s-cntrl,
+.a-d-cntrl {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  font-size: 2rem;
+  margin-top: -3.5rem;
+}
+
+button:not(.close-modal):not(.line-change) {
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #d01619;
+  color: #ffd900ea;
+  transition: all 0.2s ease-in-out;
+  width: 90px;
+  height: 90px;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.setting-bttns {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: space-around;
+  margin-top: -2rem;
+}
+.setting-bttns button {
+  margin: 0.9rem;
+  flex-shrink: 0; 
+  
+}
+.setting-bttns button p{
+  font-size: 0.7rem;
+}
+button:hover:not(.close-modal):not(.line-change) {
+  cursor: pointer;
+  background-color: #f15659;
+  animation: wobble-hor-bottom 0.8s both;
+}
+
+.hide {
+  visibility: hidden;
+  display: none;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 10rem;
+  height: 10rem;
+  border-radius: 1.5rem;
+  margin-left: 0.4rem;
+  margin-top: -5rem;
+}
+.close-modal {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: 8.5rem;
+  border-radius: 50%;
+  line-height: 1em;
+  
+}
+.modal-txt {
+  text-align: center;
+}
+.line-modal{
+  font-size: 0.5rem;
+}
+
+footer{
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 8rem;
+}
+footer svg{
+  margin-bottom: -1rem;
+}
+footer p{
+  position: relative;
+  top: 20rem;
+  margin-bottom: 0;
+}
+#picker { 
+  width: 200px;
+   height: 200px;
+}
+#slide { 
+  width: 30px; 
+  height: 200px;
+}
+
+
+/* *color picker */
+#color-picker{
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+/* #picker {
+  width: 200px;
+  height: 200px
+}
+
+#slide { 
+  width: 30px;
+  height: 200px
+} 
+
+/**ANIMATION CODE */
+.slide-in-blurred-left {
+  -webkit-animation: slide-in-blurred-left 0.6s cubic-bezier(0.23, 1, 0.32, 1)
+    both;
+  animation: slide-in-blurred-left 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+/* ----------------------------------------------
+ * Generated by Animista on 2022-2-11 18:21:38
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-blurred-left
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-blurred-left {
+  0% {
+    -webkit-transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+    transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-filter: blur(40px);
+    filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+    transform: translateX(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-blurred-left {
+  0% {
+    -webkit-transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+    transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-filter: blur(40px);
+    filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0) scaleY(1) scaleX(1);
+    transform: translateX(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.glow {
+  animation: glow 0.1s ease infinite;
+}
+@keyframes glow {
+  0% {
+    text-shadow: rgb(255, 251, 0) 0px 0px 28px;
+  }
+  100% {
+    text-shadow: rgba(255, 251, 0, 1) 0px 0px 28px;
+  }
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-2-2 16:59:46
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation shake-vertical
+ * ----------------------------------------
+ */
+
+.shake-vertical {
+  -webkit-animation: shake-vertical 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    both;
+  animation: shake-vertical 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
+@-webkit-keyframes shake-vertical {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+  80% {
+    -webkit-transform: translateY(6.4px);
+    transform: translateY(6.4px);
+  }
+  90% {
+    -webkit-transform: translateY(-6.4px);
+    transform: translateY(-6.4px);
+  }
+}
+@keyframes shake-vertical {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+  80% {
+    -webkit-transform: translateY(6.4px);
+    transform: translateY(6.4px);
+  }
+  90% {
+    -webkit-transform: translateY(-6.4px);
+    transform: translateY(-6.4px);
+  }
+}
+.wobble-hor-bottom {
+  -webkit-animation: wobble-hor-bottom 0.8s both;
+  animation: wobble-hor-bottom 0.8s both;
+}
+/* ----------------------------------------------
+ * Generated by Animista on 2022-2-2 17:6:23
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation wobble-hor-bottom
+ * ----------------------------------------
+ */
+@-webkit-keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+  }
+  15% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+    transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+    transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+    transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+    transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+@keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+  }
+  15% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+    transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+    transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+    transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+    transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
